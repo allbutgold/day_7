@@ -6,7 +6,7 @@ export function save(item) {
   return new Promise((resolve, reject) => {
     load().then(data => {
       data.push(item)
-      fs.writeFile(DB_PATH, data, (err) => {
+      fs.writeFile(DB_PATH, JSON.stringify(data), (err) => {
         if (err) reject(err)
         else {
           resolve(data)
@@ -21,7 +21,7 @@ export function load() {
     fs.readFile(DB_PATH, 'utf8', (err, data) => {
       if(err) reject(err)
       else {
-        resolve(data)
+        resolve(JSON.parse(data))
       }
     })
   })
