@@ -2,17 +2,26 @@ import express from "express";
 import cors from "cors";
 
 const app = express();
-
-app.use(cors());
 const PORT = 9999
 
-app.get('/', (req, res)=> {
-  res.end()
-});
+app.use(cors()); // Cross Origin Resource Sharing
+app.use(express.json()) // befuellt den request.body wenn der content-type json ist
 
-// this is my get route
-app.post('/', (req, res)=> {
-  res.end('Hallo')
-});
+
+
+app.get('/api/v1/lkw', (req, res) => {
+  res.end()
+})
+
+app.post('/api/v1/lkw', (req, res) => {
+  const lkw = req.body
+  console.log(lkw)
+  res.end()
+  /* const lkw = {
+    fahrgestellnummer: req.body.fahrgestellnummer
+  } */
+})
+
+
 
 app.listen(PORT, () => console.log('listening on port ' + PORT));
